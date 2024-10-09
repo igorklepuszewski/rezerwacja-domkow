@@ -1,0 +1,31 @@
+<form action="{% url 'house-list' %}"><input type="submit" value="Lista domkow"/></form>
+<h1>Domek {{ object.name }}</h1>
+<p>Tutaj kiedyś będą detale tego domku:</p>
+<ul>
+    <li>Powierzchnia: 100 m²</li>
+    <li>Liczba pokoi: 3</li>
+    <li>Liczba łazienek: 2</li>
+    <li>Wyposażenie: Kuchnia, salon, taras</li>
+    <li>Widok: Na jezioro</li>
+</ul>
+
+<form method="POST" action="{% url 'house-reserve' object.id %}">
+    {% csrf_token %} 
+    {% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.label_tag }} {{ field }}
+        <div style="color: red">
+            {{ field.errors }}
+        </div>
+        {% if field.help_text %}
+          <p class="help" id="{{ field.auto_id }}_helptext">
+            {{ field.help_text|safe }}
+          </p>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <div style="color: red">
+        {{ form.non_field_errors }}
+    </div>
+    <input type="submit" value="Reserve"/>
+</form>

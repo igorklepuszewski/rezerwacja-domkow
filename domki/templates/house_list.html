@@ -1,0 +1,19 @@
+<form action="{% url 'user-detail' request.user.id %}"><input type="submit" value="Profil uzytkownika"/></form>
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Filter</button>
+</form>
+
+<h1>Lista domkow</h1>
+<ul> 
+    <!-- Iterate over object_list -->
+    {% for object in object_list %} 
+    <!-- Display Objects -->
+    <li>{{ object.id }} {{ object.name }} <form action="{% url 'house-detail' object.id %}"><input type="submit" value="Szczegoly"/></form></li> 
+   
+    <hr/> 
+    <!-- If object_list is empty  -->
+    {% empty %} 
+    <li>Nie ma domkow</li> 
+    {% endfor %} 
+</ul>

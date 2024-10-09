@@ -1,0 +1,11 @@
+<form action="{% url 'house-list' %}"><input type="submit" value="Lista domkow"/></form>
+<h1>Profil {{ object.username }}</h1>
+<h2>Rezerwacje</h2>
+{% for res in reservations %}
+    <!-- Display Objects -->
+    <li>{{ res.house.name }} {{ res.start_date }} - {{ res.end_date }} <form action="{% url 'house-detail' res.house.id %}"><input type="submit" value="Zobacz domek"/></form></li> 
+   
+    <hr/> 
+{% empty %} 
+<li>Nie ma rezerwacji</li> 
+{% endfor %} 
